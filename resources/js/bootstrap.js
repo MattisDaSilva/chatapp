@@ -9,12 +9,6 @@ window.axios = axios;
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
-import Vue from 'vue';
-
-new Vue({
-  // options de l'instance Vue
-}).$mount('#app');
-
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
  * for events that are broadcast by Laravel. Echo and event broadcasting

@@ -1,14 +1,13 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\PageController;
-use App\Http\Controllers\ChatsController;
-use App\Http\Controllers\ClasseController;
 use App\Http\Controllers\AccueilController;
-use App\Http\Controllers\MatiereController;
-use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ClasseController;
 use App\Http\Controllers\LanguageController;
+use App\Http\Controllers\MatiereController;
+use App\Http\Controllers\PageController;
 use App\Http\Controllers\ProfesseurController;
+use App\Http\Controllers\ProfileController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,15 +20,18 @@ use App\Http\Controllers\ProfesseurController;
 |
 */
 
-Route::get('/', function () {
-    return view('auth.login');
-})->name('login');
+Route::get('/', [AccueilController::class, 'index'])->name('accueil');
+
+Route::get('page/{numero_page}', [PageController::class, 'index'])->name('page_par_numero');
 
 
 
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/chat', [ChatsController::class, 'index']);
-Route::get('messages', [ChatsController::class, 'fetchMessages']);
+Route::get('/', 'ChatsController@index');
+Route::get('messages', 'ChatsController@fetchMessages');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

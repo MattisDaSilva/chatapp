@@ -52,7 +52,7 @@ use Silber\Bouncer\Database\HasRolesAndAbilities;
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
-    // use HasRolesAndAbilities;
+    use HasRolesAndAbilities;
 
     /**
      * The attributes that are mass assignable.
