@@ -15,10 +15,9 @@
 
 <body>
   <div class="container">
-    <nav class="pb-5">
+    <nav class="pb-1">
       <div>
-        <a href="{{ route('matiere.index') }}">{{ __('Listes des matières') }}</a>
-        <a href="{{ route('professeur.index') }}">{{ __('Listes des professeurs') }}</a>
+
       </div>
       <div>
         {{ __('Vous naviguez en') }} [{{ session('locale') }}] [{{ App::getLocale() }}]

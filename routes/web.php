@@ -20,15 +20,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [AccueilController::class, 'index'])->name('accueil');
+Route::get('/', function () {
+    return view('auth.login');
+})->name('login');
 
-Route::get('page/{numero_page}', [PageController::class, 'index'])->name('page_par_numero');
 
-
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/chat', function () {
+    return view('chat');
+})->middleware(['auth', 'verified'])->name('chat');
 
 Route::get('/', 'ChatsController@index');
 Route::get('messages', 'ChatsController@fetchMessages');
