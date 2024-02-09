@@ -29,7 +29,8 @@ window.Echo = new Echo({
     enabledTransports: ['ws', 'wss'],
 });
 
-
+const currentUserElement = document.getElementById('userIdMessage');
+const currentUserId = currentUserElement.dataset.userId;
 // Créez une application Vue
 const app = createApp({
     // Initialisation de l'état de l'application
@@ -43,10 +44,12 @@ const app = createApp({
         this.fetchMessages(); // Appelez fetchMessages lors de la création de l'application
         window.Echo.private('chat')
             .listen('MessageSent', (e) => {
+                if (e.user.id != currentUserId) {
                 this.messages.push({
                     message: e.message.message,
                     user: e.user
                 });
+            }
             });
 
     },

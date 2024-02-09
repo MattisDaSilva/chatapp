@@ -1,6 +1,7 @@
  @extends('layouts.app')
  @section('content')
  <div class="container" id="app">
+    <div id='userIdMessage' data-user-id="{{ auth()->id() }}" display='hidden'></div>
      <div class="card">
          <div class="card-header">Chats</div>
          <div class="card-body">
