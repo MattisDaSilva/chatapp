@@ -52,7 +52,7 @@ use Silber\Bouncer\Database\HasRolesAndAbilities;
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
-    // use HasRolesAndAbilities;
+    use HasRolesAndAbilities;
 
     /**
      * The attributes that are mass assignable.
@@ -84,4 +84,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function messages()
+    {
+        return $this->hasMany(Message::class);
+    }
 }
