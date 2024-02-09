@@ -1,13 +1,14 @@
 <?php
 
-use App\Http\Controllers\AccueilController;
-use App\Http\Controllers\ClasseController;
-use App\Http\Controllers\LanguageController;
-use App\Http\Controllers\MatiereController;
-use App\Http\Controllers\PageController;
-use App\Http\Controllers\ProfesseurController;
-use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PageController;
+use App\Http\Controllers\ChatsController;
+use App\Http\Controllers\ClasseController;
+use App\Http\Controllers\AccueilController;
+use App\Http\Controllers\MatiereController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\LanguageController;
+use App\Http\Controllers\ProfesseurController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,10 +25,10 @@ Route::get('/', [AccueilController::class, 'index'])->name('accueil');
 
 Route::get('page/{numero_page}', [PageController::class, 'index'])->name('page_par_numero');
 
-// Route::get('classe/{classe}/toto', [ClasseController::class, 'toto'])->name('classe.toto');
-Route::resource('classe', ClasseController::class);
-Route::resource('matiere', MatiereController::class);
-Route::resource('professeur', ProfesseurController::class);
+Route::get('/chat', [ChatsController::class, 'index']);
+Route::get('/messages', [ChatsController::class, 'fetchMessages']);
+Route::post('/messages', [ChatsController::class, 'sendMessage']);
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -42,3 +43,7 @@ Route::middleware('auth')->group(function () {
 Route::get('language/{code_iso}', [LanguageController::class, 'change'])->name('language.change');
 
 require __DIR__.'/auth.php';
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
