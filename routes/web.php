@@ -24,13 +24,14 @@ Route::get('/', function () {
     return view('auth.login');
 })->name('login');
 
+// Route::get('classe/{classe}/toto', [ClasseController::class, 'toto'])->name('classe.toto');
+Route::resource('classe', ClasseController::class);
+Route::resource('matiere', MatiereController::class);
+Route::resource('professeur', ProfesseurController::class);
 
-Route::get('/chat', function () {
-    return view('chat');
-})->middleware(['auth', 'verified'])->name('chat');
-
-Route::get('/', 'ChatsController@index');
-Route::get('messages', 'ChatsController@fetchMessages');
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
