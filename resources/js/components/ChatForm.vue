@@ -1,5 +1,6 @@
 <template>
   <div class="input-group">
+    @csrf
     <input
       id="btn-input"
       type="text"
