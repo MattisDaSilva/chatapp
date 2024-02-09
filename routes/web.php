@@ -29,11 +29,6 @@ Route::get('/chat', [ChatsController::class, 'index']);
 Route::get('/messages', [ChatsController::class, 'fetchMessages']);
 Route::post('/messages', [ChatsController::class, 'sendMessage']);
 
-// Route::get('classe/{classe}/toto', [ClasseController::class, 'toto'])->name('classe.toto');
-Route::resource('classe', ClasseController::class);
-Route::resource('matiere', MatiereController::class);
-Route::resource('professeur', ProfesseurController::class);
-
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
