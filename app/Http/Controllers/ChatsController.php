@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\MessageDeleted;
 use App\Events\MessageSent;
 use Illuminate\Http\Request;
 use App\Models\Message;
@@ -35,5 +36,12 @@ class ChatsController extends Controller
         broadcast(new MessageSent($user, $message))->toOthers();
         return ['status' => 'Message Sent!'];
     }
-}
+    public function deleteMessage($id)
+    {
+        $message = Message::findOrFail($id);
+        broadcast(new MessageDeleted($message))->toOthers();
+        $message->delete();
 
+        return response()->json(['message' => 'Message supprimé avec succès']);
+    }
+}

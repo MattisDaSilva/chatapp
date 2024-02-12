@@ -45,13 +45,16 @@ const app = createApp({
         window.Echo.private('chat')
             .listen('MessageSent', (e) => {
                 if (e.user.id != currentUserId) {
-                this.messages.push({
-                    message: e.message.message,
-                    user: e.user
-                });
-            }
+                    this.messages.push({
+                        message: e.message.message,
+                        user: e.user
+                    });
+                }
+            })
+            .listen('MessageDeleted', (e) => {
+                // Retirer le message supprimé de la liste des messages
+                this.messages = this.messages.filter(message => message.id !== e.message.id);
             });
-
     },
     methods: {
         fetchMessages() {
@@ -73,6 +76,7 @@ const app = createApp({
             });
         }
     }
+
 });
 
 // Enregistrez les composants Vue
