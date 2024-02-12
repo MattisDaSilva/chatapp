@@ -28,6 +28,7 @@ Route::get('page/{numero_page}', [PageController::class, 'index'])->name('page_p
 Route::get('/chat', [ChatsController::class, 'index']);
 Route::get('/messages', [ChatsController::class, 'fetchMessages']);
 Route::post('/messages', [ChatsController::class, 'sendMessage']);
+Route::delete('/messages/{id}', [ChatsController::class, 'deleteMessage']);
 
 Route::get('/dashboard', function () {
     return view('dashboard');
