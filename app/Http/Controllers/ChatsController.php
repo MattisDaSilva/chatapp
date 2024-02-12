@@ -19,7 +19,8 @@ class ChatsController extends Controller
 
     public function index()
     {
-        return view('chat');
+        $permission = Auth::user()->can('delete-messages');
+        return view('chat', compact('permission'));
     }
 
     public function fetchMessages()
@@ -38,10 +39,13 @@ class ChatsController extends Controller
     }
     public function deleteMessage($id)
     {
+        if(Auth::user()->can('delete-messages')){
         $message = Message::findOrFail($id);
         broadcast(new MessageDeleted($message))->toOthers();
         $message->delete();
 
         return response()->json(['message' => 'Message supprimé avec succès']);
+        }
+        abort(405);
     }
 }

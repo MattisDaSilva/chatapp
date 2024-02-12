@@ -17,11 +17,6 @@
   <div class="container">
     <nav class="pb-5">
 
-      <div>
-        {{ __('Vous naviguez en') }} [{{ session('locale') }}] [{{ App::getLocale() }}]
-        <a href="{{ route('language.change', ['code_iso' => 'fr']) }}">{{ __('French') }}</a>
-        <a href="{{ route('language.change', ['code_iso' => 'en']) }}">{{ __('English') }}</a>
-      </div>
       <form method="POST" action="{{ route('logout') }}">
         @csrf
 
